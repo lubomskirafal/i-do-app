@@ -6,7 +6,7 @@
 
 <pre>
     <code>
-        git clone https://github.com/lubomskirafal/basic-webpack-boilerplate.git
+        git clone https://github.com/lubomskirafal/i-do-app.git
         npm i
     </code>
 </pre>
