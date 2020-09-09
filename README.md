@@ -1,8 +1,10 @@
 # **iDo**
-**To do React app**
+## **To do React app**
 #
 
+#
 ## **Instalation**
+#
 
 <pre>
     <code>
@@ -11,7 +13,6 @@
     </code>
 </pre>
 <br />
-#
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br />
 
