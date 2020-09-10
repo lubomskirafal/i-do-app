@@ -6,6 +6,9 @@
     padding: .2 $main-padding;
     overflow: hidden;
     background-color: transparent;
+    &:hover {
+        cursor: pointer;
+    }
     &::before,
     &::after{
         position: absolute;
