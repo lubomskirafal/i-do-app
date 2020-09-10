@@ -9,4 +9,9 @@
         font-size: 1rem;
         padding: $main-padding;
     }
+    &__day {
+        &--sunday {
+            color: red;
+        }
+    }
 }

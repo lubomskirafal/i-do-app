@@ -1,11 +1,13 @@
 import React from 'react';
 
 const Button = (props)=> {
+    const {classes, content, setIndex} = props;
     return (
         <button 
-            className={props.classes}
+            className={classes}
+            onClick={setIndex}
         >
-        {props.content}
+        {content}
         </button>
     )
 };
