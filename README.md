@@ -1,5 +1,5 @@
 # **iDo**
-## **Calendar width to do list**
+## **Calendar with to do list**
 
 #
 ## **Instalation**
