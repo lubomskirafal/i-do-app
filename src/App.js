@@ -1,9 +1,14 @@
 import React from 'react';
 import './App.scss';
+import Nav from './components/Nav';
+import DaysLables from './components/DaysLabels';
 
 function App() {
   return (
-    <h1>sdvsdv</h1>
+    <div className="calendar">
+      <Nav />
+      <DaysLables />
+    </div>
   );
 }
 

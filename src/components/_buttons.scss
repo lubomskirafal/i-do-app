@@ -1,0 +1,47 @@
+.button {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border: none;
+    padding: .2 $main-padding;
+    overflow: hidden;
+    background-color: transparent;
+    &::before,
+    &::after{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-origin: left;
+        transform: translate(-50%, -50%) rotate(-45deg);
+        content: '';
+        width: 40%;
+        height: 2px;
+        background-color: #fff;
+        opacity: .7;
+    }
+    &::after {
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+    &--next {
+        &::before,
+        &::after{
+            transform-origin: right;
+        }
+    }
+    &--add-task {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 0 $main-padding;
+        justify-items: center;
+        border-radius: 15px;
+        flex-wrap: nowrap;
+        background-color: lighten(yellow, 20%);
+        color: $main-fc;
+        font-size: 1rem;
+        &::before,
+        &::after {
+            content: none;
+        }
+    }
+}

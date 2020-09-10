@@ -1,0 +1,12 @@
+.labels {
+    &__box {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        color: $main-fc;
+        font-size: 1rem;
+        padding: $main-padding;
+    }
+}

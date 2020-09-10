@@ -1,0 +1,25 @@
+.navigation {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: $main-padding;
+    font-size: 1.2rem;
+    background-color: blue;
+    .select {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: nowrap;
+        &__display-span {
+            padding: $main-padding/2;
+            border-radius: 10px;
+            color: #fff;
+            &--year {
+                font-family: monospace, sans-serif;
+                font-size: 1.1rem;
+            }
+        }
+    }
+}

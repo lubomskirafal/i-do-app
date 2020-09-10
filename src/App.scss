@@ -1,1 +1,18 @@
 @import './components/reset';
+@import './components/variables';
+@import './components/buttons';
+@import './components/navigation';
+@import './components/daysLabels';
+
+.calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    flex-wrap:  nowrap;
+    margin: auto;
+    width: 100%;
+    height: 100vh;
+    font-size: $main-fz;
+    font-family: arial, sans-serif;
+}
