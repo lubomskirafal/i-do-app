@@ -1,5 +1,5 @@
 # **iDo**
-## **To do React app**
+## **Calendar width to do list**
 
 #
 ## **Instalation**
