@@ -9,7 +9,7 @@ class App extends React.Component {
 
     this.state = {
       month:'',
-      year:'',
+      year: new Date().getFullYear(),
       monthIndex: new Date().getMonth(),
     };
 
@@ -20,7 +20,7 @@ class App extends React.Component {
     this.setState({month: this.months[this.state.monthIndex]})
   };
 
-  setIndex = (e)=> {
+  setMonthIndex = (e)=> {
     let index = this.state.monthIndex;
     if(e.target.classList.contains('button--prev')) {
       index--;
@@ -38,6 +38,17 @@ class App extends React.Component {
     }));
   };
 
+  setYear = (e)=> {
+    let index = this.state.year;
+    if(e.target.classList.contains('button--prev')) index--;
+    
+    if(e.target.classList.contains('button--next')) index++;
+
+    return this.setState(prevState=>({
+      year: prevState.year = index
+    }));
+  };
+
   componentDidMount() {
     this.selectMonth();
   }
@@ -49,7 +60,8 @@ class App extends React.Component {
         <Nav 
           month={this.state.month}
           year={this.state.year}
-          setIndex={this.setIndex}
+          setMonthIndex={this.setMonthIndex}
+          setYear={this.setYear}
         />
         <DaysLables />
       </div>

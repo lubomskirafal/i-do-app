@@ -1,11 +1,11 @@
 import React from 'react';
 
 const Button = (props)=> {
-    const {classes, content, setIndex} = props;
+    const {classes, content, setMonthIndex, setYear} = props;
     return (
         <button 
             className={classes}
-            onClick={setIndex}
+            onClick={setMonthIndex?setMonthIndex:setYear}
         >
         {content}
         </button>

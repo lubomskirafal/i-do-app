@@ -27,30 +27,30 @@ const Nav = (props)=> {
             buttonNext,
         } = classes;
 
-    const {month, year, setIndex} = props;
+    const {month, year, setMonthIndex, setYear} = props;
 
     return(
         <nav className={navigation}>
             <div className={selectMonth}>
                 <Button 
                     classes={buttonPrev}
-                    setIndex={setIndex}
+                    setMonthIndex={setMonthIndex}
                 />
                 <span className={displayMonth}>{month}</span>
                 <Button 
                     classes={buttonNext}
-                    setIndex={setIndex}
+                    setMonthIndex={setMonthIndex}
                 />
             </div>
             <div className={selectYear}>
                 <Button
                     classes={buttonPrev}
-                    setIndex={setIndex}
+                    setYear={setYear}
                 />
                 <span className={displayYear}>{year}</span>
                 <Button 
                     classes={buttonNext}
-                    setIndex={setIndex}
+                    setYear={setYear}
                 />
             </div>
             <div className={selectButton}>
