@@ -35,21 +35,34 @@ class App extends React.Component {
     }
   };
 
+  isToday = (date)=>{
+    const today = new Date();
+    const todayDay = today.getDate();
+    const todayMonth = today.getMonth();
+    const todayYear = today.getFullYear();
+    if (
+      todayDay===date&&
+      todayMonth===this.state.monthIndex&&
+      todayYear===this.state.year
+      ) return  true;
+      return false;
+  };
+
   getDays = ()=> {
     this.days = [];
     this.getPrevMonthDays();
-    let hollyday = false;
-    let date;
+    let hollyday, date;
+    
     for (let i=0; i<this.getDate().getDate(); i++) {
       date = i+1; 
       const isSunnday = new Date(this.state.year,this.state.monthIndex, date).getDay();
-      if(isSunnday === 0) hollyday = true;
-      if(isSunnday !== 0) hollyday = false;
+      isSunnday===0? hollyday=true:hollyday=false;
       const day = {
         date: date,
         tasks:{},
         classes:'day',
-        hollyday: hollyday
+        hollyday: hollyday,
+        today:this.isToday(date)
       };
       this.days.push(day);
     };
@@ -112,13 +125,19 @@ class App extends React.Component {
 
   render (){
     const days = this.days.map(day=> {
-      const {date, task, classes, hollyday} = day;
+      const {date, task, classes, hollyday, today} = day;
+      let styles;
+      if(!hollyday) styles = classes;
+      if(hollyday) styles = `${classes} sunday`;
+      if(today) styles = `${styles} today`;
+      if(today&&hollyday) styles = `${styles} todayIsSunday`;
       return (
         <Day 
           key={date}
           task={task}
           date={date}
-          classes={hollyday?`${classes} sunday`: classes}
+          classes={styles}
+          hollyday={hollyday}
         />
       );
     });
