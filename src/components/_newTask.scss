@@ -1,0 +1,18 @@
+.newTask {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    
+    border-radius: 5px;
+    color: $second-fc;
+    padding: $main-padding;
+    box-shadow: 2px 2px 20px -8px $main-fc;
+    &__form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+}

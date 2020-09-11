@@ -27,36 +27,37 @@ const Nav = (props)=> {
             buttonNext,
         } = classes;
 
-    const {month, year, setMonthIndex, setYear} = props;
+    const {month, year, setMonthIndex, setYear, handleNewTaskModal} = props;
 
     return(
         <nav className={navigation}>
             <div className={selectMonth}>
                 <Button 
                     classes={buttonPrev}
-                    setMonthIndex={setMonthIndex}
+                    handleClick={setMonthIndex}
                 />
                 <span className={displayMonth}>{month}</span>
                 <Button 
                     classes={buttonNext}
-                    setMonthIndex={setMonthIndex}
+                    handleClick={setMonthIndex}
                 />
             </div>
             <div className={selectYear}>
                 <Button
                     classes={buttonPrev}
-                    setYear={setYear}
+                    handleClick={setYear}
                 />
                 <span className={displayYear}>{year}</span>
                 <Button 
                     classes={buttonNext}
-                    setYear={setYear}
+                    handleClick={setYear}
                 />
             </div>
             <div className={selectButton}>
                 <Button 
                     classes={buttonAddTask}
                     content="Add task" 
+                    handleClick={handleNewTaskModal}
                 />
             </div>
         </nav>

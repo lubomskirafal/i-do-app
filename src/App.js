@@ -3,15 +3,18 @@ import './App.scss';
 import Nav from './components/Nav';
 import DaysLables from './components/DaysLabels';
 import Day from './components/Day';
+import NewTask from './components/NewTask';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      days: '',
       month:'',
       year: new Date().getFullYear(),
-      monthIndex: new Date().getMonth()
+      monthIndex: new Date().getMonth(),
+      newTask: false
     };
 
     this.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -65,6 +68,7 @@ class App extends React.Component {
         today:this.isToday(date)
       };
       this.days.push(day);
+      
     };
   };
 
@@ -119,11 +123,18 @@ class App extends React.Component {
     
   };
 
+  handleNewTaskModal = (e)=> {
+    this.setState(prevState=>({
+      newTask: !prevState.newTask
+    }));
+  };
+
   componentDidMount() {
     this.selectMonth();
   };
 
   render (){
+    const {newTask} = this.state;
     const days = this.days.map(day=> {
       const {date, task, classes, hollyday, today} = day;
       let styles;
@@ -150,14 +161,17 @@ class App extends React.Component {
           year={this.state.year}
           setMonthIndex={this.setMonthIndex}
           setYear={this.setYear}
+          handleNewTaskModal={this.handleNewTaskModal}
         />
         
         <div
           className={"day__box"}
+          
           >
             <DaysLables />
             {days}
           </div>
+          {newTask&&<NewTask handleNewTaskModal={this.handleNewTaskModal} />}
       </div>
     );
   };
