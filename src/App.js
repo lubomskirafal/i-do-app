@@ -19,27 +19,52 @@ class App extends React.Component {
     this.days = [];
   };
 
-  getDate = ()=> {
-    return new Date(this.state.year, this.state.monthIndex,0);
+  getDate = (prev)=> { 
+    const date = new Date(this.state.year, prev?this.state.monthIndex:this.state.monthIndex+1,0);
+    return date;
+  };
+
+  getPrevMonthDays = ()=> {
+    for(let i=0; i<=this.getDate('prev').getDay(); i++) {
+      const day = {
+        date: `blanc-${i+1}`,
+        tasks:{},
+        classes:'blanc'
+      };
+      this.days.push(day);
+    }
   };
 
   getDays = ()=> {
     this.days = [];
+    this.getPrevMonthDays();
+    let hollyday = false;
+    let date;
     for (let i=0; i<this.getDate().getDate(); i++) {
+      date = i+1; 
+      const isSunnday = new Date(this.state.year,this.state.monthIndex, date).getDay();
+      if(isSunnday === 0) hollyday = true;
+      if(isSunnday !== 0) hollyday = false;
       const day = {
-        date: i+1,
-        tasks:{}
+        date: date,
+        tasks:{},
+        classes:'day',
+        hollyday: hollyday
       };
       this.days.push(day);
     };
   };
 
   selectMonth = ()=> {
-    this.setState({month: this.months[this.state.monthIndex]})
+    this.setState({
+      month: this.months[this.state.monthIndex],
+      days: this.getDays()
+    });
   };
 
   setMonthIndex = (e)=> {
     let index = this.state.monthIndex;
+    
     if(e.target.classList.contains('button--prev')) {
       index--;
       if(index<0) {
@@ -59,11 +84,12 @@ class App extends React.Component {
         }));
       };
     };
-
-    return this.setState(prevState=>({
+    
+    this.setState(prevState=>({
       monthIndex: prevState.monthIndex = index,
-      month: this.months[prevState.monthIndex]
-    }), this.getDays());
+      month: prevState.month = this.months[prevState.monthIndex],
+      days: this.getDays()
+    }));
   };
 
   setYear = (e)=> {
@@ -72,29 +98,33 @@ class App extends React.Component {
     
     if(e.target.classList.contains('button--next')) index++;
 
-    return this.setState(prevState=>({
-      year: prevState.year = index
-    }), this.getDays());
+    this.setState(prevState=>({
+      monthIndex: prevState.monthIndex,
+      year: prevState.year = index,
+      days: this.getDays()
+    }));
+    
   };
 
   componentDidMount() {
     this.selectMonth();
-    this.getDays();
-  }
+  };
 
   render (){
     const days = this.days.map(day=> {
-      const {date, task} = day;
+      const {date, task, classes, hollyday} = day;
       return (
         <Day 
           key={date}
           task={task}
           date={date}
+          classes={hollyday?`${classes} sunday`: classes}
         />
-      )
+      );
     });
-
+    
     return (
+      
       <div className="calendar">
         <Nav 
           month={this.state.month}
@@ -111,7 +141,7 @@ class App extends React.Component {
           </div>
       </div>
     );
-  }
-}
+  };
+};
 
 export default App;

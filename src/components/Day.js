@@ -1,9 +1,9 @@
 import React from 'react';
 const Day = (props)=> {
-    const {date,} = props;
+    const {date,classes} = props;
     return (
         <div 
-            className={"day"}
+            className={classes}
             id={date}
         >
             {date}

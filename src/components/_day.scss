@@ -4,6 +4,9 @@
     width: 100%;
     height: 100%;
     font-size: 1rem;
+    &:hover {
+        cursor: pointer;
+    }
     &__box {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -13,5 +16,17 @@
         padding: $main-padding;
         gap: 5px;
     }
+}
+
+.sunday {
+    color: #fff;
+    background-color: red;
+    border: 1px solid #fff;
+}
+.blanc {
+    border: none;
+    background-color: transparent;
+    color: #ffffff;
+    visibility: hidden;
 }
 
