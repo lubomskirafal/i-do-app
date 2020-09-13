@@ -1,6 +1,6 @@
 # **MIT License**
 
-## **Copyright (c) 2020 www.lubomskirafa.pl**
+## **Copyright (c) 2020 [www.lubomskirafal.pl](https://www.lubomskirafal.pl)**
 
 #
 
@@ -15,5 +15,5 @@ the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or 
 #
 
 
-**2020 www.lubomskirafal.pl**
+**2020 [www.lubomskirafal.pl](https://www.lubomskirafal.pl)**
 **© 2020 GitHub, Inc.**
