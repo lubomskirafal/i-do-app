@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from './Button';
+import Error from './Error';
 
 const NewTask = (props)=> {
     const classes = {
@@ -9,19 +10,54 @@ const NewTask = (props)=> {
         form: 'newTask__form',
     };
 
-    const {buttonClose, buttonAdd, newTask, form} = classes;
-    const {handleNewTaskModal} = props;
+    const {
+        buttonClose, 
+        buttonAdd, 
+        newTask, 
+        form
+    } = classes;
+
+    const {
+        handleNewTaskModal, 
+        handleAddNewTask, 
+        handleFormChange, 
+        newTaskDate, 
+        newTaskCategory, 
+        newTaskPriority, 
+        newTaskTitle, 
+        newTaskContent,
+        noTaskTitle,
+        noTaskContent
+    } = props;
     
     return(
+
         <div className={newTask}>
         <Button
             classes={buttonClose}
             handleClick={handleNewTaskModal}
         />
             <form className={form}>
-                <input type="date" id="date"/>
-                <select name="category" id="category">
-                    <option disabled selected value="null">Category</option>
+                <input 
+                    type="date" 
+                    id="date" 
+                    value={newTaskDate}
+                    onChange={(e)=> handleFormChange(e.target.value, 'newTaskDate')}
+                />
+
+                <select 
+                    name="category" 
+                    id="category"
+                    value={newTaskCategory}
+                    onChange={(e)=> handleFormChange(e.target.value,'newTaskCategory')}
+                >
+                    <option 
+                        disabled 
+                        value="category"
+                    >
+                    Category
+                    </option>
+
                     <option value="work">Work</option>
                     <option value="home">Home</option>
                     <option value="finance">Finance</option>
@@ -31,27 +67,42 @@ const NewTask = (props)=> {
 
                 <label 
                     htmlFor="priority">Priority
-                    <input type="checkbox" id="priority"/>
+                    <input 
+                        type="checkbox" 
+                        id="priority" 
+                        checked={newTaskPriority}
+                        onChange={(e)=> handleFormChange(e.target.checked, 'newTaskPriority')}
+                    />
                 </label>
                 
                 <input 
                     type="text" 
                     id="title"
                     placeholder="Title"
+                    value={newTaskTitle}
+                    onChange={(e)=> handleFormChange(e.target.value, 'newTaskTitle')}
                 />
-                
+
+                {noTaskTitle&&<Error content={"Title required"}/>}
+
                 <textarea 
-                    placeholder="Content"
+                    onChange={(e)=> handleFormChange(e.target.value, 'newTaskContent')}
+                    value={newTaskContent}
+                    placeholder="Message"
                     name="content" 
                     id="content" 
                     cols="30" 
                     rows="10"
                 >
+                
                 </textarea>
+
+                {noTaskContent&&<Error content={"Content required"}/>}
 
                 <Button
                     classes={buttonAdd}
                     content={'Add task'}
+                    handleClick={handleAddNewTask}
                 />
             </form>
         </div>

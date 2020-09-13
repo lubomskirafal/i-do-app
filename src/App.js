@@ -14,12 +14,35 @@ class App extends React.Component {
       month:'',
       year: new Date().getFullYear(),
       monthIndex: new Date().getMonth(),
-      newTask: false
+      newTask: false,
+      newTaskDate: this.getTodayDate().date,
+      newTaskCategory: 'category',
+      newTaskPriority: false,
+      newTaskTitle: '',
+      newTaskContent: '',
+      tasks:'',
+      error: {
+        title: false,
+        content: false
+      },
     };
 
     this.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
     this.days = [];
+    this.tasks = [];
+  };
+
+  getTodayDate = ()=> {
+    //set default date to date input state
+    const today = new Date();
+    const day = today.getDate();
+    const month = today.getMonth();
+    const year = today.getFullYear();
+    const date = `${year}-${month+1<10?"0"+(month+1):(month+1)}-${day<10?"0"+day:day}`;
+    return ({
+      day, month, year, date
+    });
   };
 
   getDate = (prev)=> { 
@@ -32,9 +55,9 @@ class App extends React.Component {
     //create "blank" previous month days
     for(let i=0; i<=this.getDate('prev').getDay(); i++) {
       const day = {
-        date: `blanc-${i+1}`,
+        date: `blank-${i+1}`,
         tasks:{},
-        classes:'blanc'
+        classes:'blank'
       };
       this.days.push(day);
     }
@@ -42,14 +65,10 @@ class App extends React.Component {
 
   isToday = (date)=>{
     //check when is today date
-    const today = new Date();
-    const todayDay = today.getDate();
-    const todayMonth = today.getMonth();
-    const todayYear = today.getFullYear();
     if (
-      todayDay===date&&
-      todayMonth===this.state.monthIndex&&
-      todayYear===this.state.year
+      this.getTodayDate().day===date&&
+      this.getTodayDate().month===this.state.monthIndex&&
+      this.getTodayDate().year===this.state.year
       ) return  true;
       return false;
   };
@@ -138,13 +157,87 @@ class App extends React.Component {
     }));
   };
 
+  isValid = (isTitle, isContent)=> {
+    
+    let title, content;
+
+    if(isTitle === '' ) {
+      title = true;
+    }else {
+      title = false;
+    };
+
+    if(isContent === '') {
+      content = true;
+    }else {
+      content = false;
+    }
+
+    const noValid = {
+      title, content
+    };
+
+    this.setState({
+      error: {
+        title: noValid.title,
+        content: noValid.content
+      }
+    });
+    
+    if(noValid.title || noValid.content) return false;
+    return true;
+  };
+
+  handleAddNewTask = (e)=> {
+    //create new task object fom form inputs in state, and add to render array
+
+    e.preventDefault();
+    const {newTaskDate, newTaskCategory, newTaskPriority, newTaskTitle, newTaskContent} = this.state;
+
+    if(!this.isValid(newTaskTitle, newTaskContent)) return;
+    
+    const task = {
+      id: `${newTaskDate}-${newTaskTitle}`,
+      date: newTaskDate,
+      category: newTaskCategory,
+      priority: newTaskPriority,
+      title: newTaskTitle,
+      content: newTaskContent
+    };
+
+    this.tasks.push(task);
+    this.setState({tasks: this.tasks});
+    // this.handleNewTaskModal();
+  };
+
+  handleFormChange = (value, name)=> {
+    //handle changes in add new task form
+    this.setState({
+      [name]: value
+    });
+  };
+
+  
+
   componentDidMount() {
     //init date
     this.selectMonth();
   };
 
+  //render main component
+
   render (){
-    const {newTask} = this.state;
+    
+    const {
+      month, 
+      year, 
+      newTaskDate, 
+      newTaskCategory, 
+      newTaskPriority,
+      newTaskTitle,
+      newTaskContent,
+      error
+    } = this.state;
 
     const days = this.days.map(day=> {
 
@@ -173,8 +266,8 @@ class App extends React.Component {
       <div className="calendar">
         <Nav 
           //navigation component
-          month={this.state.month}
-          year={this.state.year}
+          month={month}
+          year={year}
           setMonthIndex={this.setMonthIndex}
           setYear={this.setYear}
           handleNewTaskModal={this.handleNewTaskModal}
@@ -189,7 +282,19 @@ class App extends React.Component {
             />
             {days} 
           </div>
-          {newTask&&<NewTask handleNewTaskModal={this.handleNewTaskModal} />}
+          {this.state.newTask&&<NewTask 
+            handleNewTaskModal={this.handleNewTaskModal} 
+            handleAddNewTask={this.handleAddNewTask}
+            handleFormChange={this.handleFormChange}
+            handleError={this.handleError}
+            newTaskDate={newTaskDate}
+            newTaskCategory={newTaskCategory}
+            newTaskPriority={newTaskPriority}
+            newTaskTitle={newTaskTitle}
+            newTaskContent={newTaskContent}
+            noTaskTitle={error.title}
+            noTaskContent={error.content}
+          />}
       </div>
     );
   };
