@@ -19,21 +19,36 @@ const NewTask = (props)=> {
             handleClick={handleNewTaskModal}
         />
             <form className={form}>
-                <label htmlFor="date">Set date</label>
                 <input type="date" id="date"/>
-                <label htmlFor="celect">Category</label>
                 <select name="category" id="category">
+                    <option disabled selected value="null">Category</option>
                     <option value="work">Work</option>
                     <option value="home">Home</option>
                     <option value="finance">Finance</option>
                     <option value="school">School</option>
                     <option value="other">Other</option>
                 </select>
-                <label htmlFor="priority">Priority</label>
-                <input type="checkbox" id="priority"/>
-                <label htmlFor="title">Title</label>
-                <input type="text" id="title"/>
-                <textarea name="content" id="content" cols="30" rows="10"></textarea>
+
+                <label 
+                    htmlFor="priority">Priority
+                    <input type="checkbox" id="priority"/>
+                </label>
+                
+                <input 
+                    type="text" 
+                    id="title"
+                    placeholder="Title"
+                />
+                
+                <textarea 
+                    placeholder="Content"
+                    name="content" 
+                    id="content" 
+                    cols="30" 
+                    rows="10"
+                >
+                </textarea>
+
                 <Button
                     classes={buttonAdd}
                     content={'Add task'}

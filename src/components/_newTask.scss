@@ -3,10 +3,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
-    
+    background-color: $second-fc;
     border-radius: 5px;
-    color: $second-fc;
     padding: $main-padding;
     box-shadow: 2px 2px 20px -8px $main-fc;
     &__form {
@@ -14,5 +12,47 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        color: $main-fc;
+        margin-top: 35px;
+        & * {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            border: none;
+            border-radius: 5px;
+            padding: $main-padding/2;
+        }
+        #date,
+        #title,
+        #content,
+        #category,
+        label[for="priority"] {
+            width: 100%;
+            box-shadow: 1px 1px  8px -4px $main-fc;
+        }
+        #category {
+            background-color: $second-fc;
+            color: $main-fc;
+        }
+
+        label[for="priority"] {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        input[type="checkbox"] {
+            position: relative;
+            top: 50%;
+            right: 2px;
+            transform: translateY(20%);
+        }
+
+        #date,
+        #category,
+        label[for="priority"] {
+            &:hover {
+                cursor: pointer;
+            }
+        }
     }
 }

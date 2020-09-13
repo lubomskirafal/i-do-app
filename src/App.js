@@ -23,11 +23,13 @@ class App extends React.Component {
   };
 
   getDate = (prev)=> { 
+    //get date object of selected date range
     const date = new Date(this.state.year, prev?this.state.monthIndex:this.state.monthIndex+1,0);
     return date;
   };
 
   getPrevMonthDays = ()=> {
+    //create "blank" previous month days
     for(let i=0; i<=this.getDate('prev').getDay(); i++) {
       const day = {
         date: `blanc-${i+1}`,
@@ -39,6 +41,7 @@ class App extends React.Component {
   };
 
   isToday = (date)=>{
+    //check when is today date
     const today = new Date();
     const todayDay = today.getDate();
     const todayMonth = today.getMonth();
@@ -52,6 +55,7 @@ class App extends React.Component {
   };
 
   getDays = ()=> {
+    //create day object acording days in month
     this.days = [];
     this.getPrevMonthDays();
     let hollyday, date;
@@ -73,6 +77,7 @@ class App extends React.Component {
   };
 
   selectMonth = ()=> {
+    //set month on load
     this.setState({
       month: this.months[this.state.monthIndex],
       days: this.getDays()
@@ -80,8 +85,9 @@ class App extends React.Component {
   };
 
   setMonthIndex = (e)=> {
+    //set month on btn click
     let index = this.state.monthIndex;
-    
+    //go to prev date
     if(e.target.classList.contains('button--prev')) {
       index--;
       if(index<0) {
@@ -91,7 +97,7 @@ class App extends React.Component {
         }));
       };
     };
-    
+    //go to next date
     if(e.target.classList.contains('button--next')) {
       index++;
       if(index>11) {
@@ -110,9 +116,11 @@ class App extends React.Component {
   };
 
   setYear = (e)=> {
+    //change year on btn click
     let index = this.state.year;
+    //got to prev year
     if(e.target.classList.contains('button--prev')) index--;
-    
+    //got to nex year
     if(e.target.classList.contains('button--next')) index++;
 
     this.setState(prevState=>({
@@ -124,25 +132,32 @@ class App extends React.Component {
   };
 
   handleNewTaskModal = (e)=> {
+    //open "add new task" modal
     this.setState(prevState=>({
       newTask: !prevState.newTask
     }));
   };
 
   componentDidMount() {
+    //init date
     this.selectMonth();
   };
 
   render (){
     const {newTask} = this.state;
+
     const days = this.days.map(day=> {
+
       const {date, task, classes, hollyday, today} = day;
       let styles;
+      //define day css
       if(!hollyday) styles = classes;
       if(hollyday) styles = `${classes} sunday`;
       if(today) styles = `${styles} today`;
       if(today&&hollyday) styles = `${styles} todayIsSunday`;
+      
       return (
+        //return array of days to render include html structure
         <Day 
           key={date}
           task={task}
@@ -154,9 +169,10 @@ class App extends React.Component {
     });
     
     return (
-      
+      //render main component
       <div className="calendar">
         <Nav 
+          //navigation component
           month={this.state.month}
           year={this.state.year}
           setMonthIndex={this.setMonthIndex}
@@ -165,11 +181,13 @@ class App extends React.Component {
         />
         
         <div
+          //main calendar component
           className={"day__box"}
-          
           >
-            <DaysLables />
-            {days}
+            <DaysLables 
+              //calendar days name component
+            />
+            {days} 
           </div>
           {newTask&&<NewTask handleNewTaskModal={this.handleNewTaskModal} />}
       </div>
