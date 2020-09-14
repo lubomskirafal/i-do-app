@@ -33,9 +33,15 @@ class App extends React.Component {
     this.tasks = [];
   };
 
-  getTodayDate = ()=> {
+  getTodayDate = (y, m, d)=> {
     //set default date to date input state
-    const today = new Date();
+    let today;
+    if(y&&m&&d) {
+      today = new Date(y, m, d)
+    }else {
+      today = new Date();
+    };
+    
     const day = today.getDate();
     const month = today.getMonth();
     const year = today.getFullYear();
@@ -83,15 +89,17 @@ class App extends React.Component {
       date = i+1; 
       const isSunnday = new Date(this.state.year,this.state.monthIndex, date).getDay();
       isSunnday===0? hollyday=true:hollyday=false;
+
       const day = {
+        id: this.getTodayDate(this.state.year,this.state.monthIndex, date, date).date,
         date: date,
-        tasks:{},
+        tasks: [],
         classes:'day',
         hollyday: hollyday,
         today:this.isToday(date)
       };
+      console.log(day.id)
       this.days.push(day);
-      
     };
   };
 
@@ -197,7 +205,10 @@ class App extends React.Component {
     if(!this.isValid(newTaskTitle, newTaskContent)) return;
     
     const task = {
-      id: `${newTaskDate}-${newTaskTitle}`,
+      id: {
+        date: newTaskDate,
+        title: newTaskTitle
+      },
       date: newTaskDate,
       category: newTaskCategory,
       priority: newTaskPriority,
@@ -206,8 +217,17 @@ class App extends React.Component {
     };
 
     this.tasks.push(task);
+
+    this.days.forEach(day=>{
+      
+      if(day.id === task.id.date) {
+        day.tasks.push(task);
+        day.classes = `${day.classes} day__tasked`;
+      };
+    });
+
     this.setState({tasks: this.tasks});
-    // this.handleNewTaskModal();
+    this.handleNewTaskModal();
   };
 
   handleFormChange = (value, name)=> {

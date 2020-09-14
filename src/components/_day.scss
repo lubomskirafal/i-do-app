@@ -19,6 +19,10 @@
         padding: $main-padding;
         gap: 5px;
     }
+    &__tasked {
+        color: blue;
+        background-color: orangered;
+    }
 }
 
 .today {
