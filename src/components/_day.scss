@@ -1,14 +1,14 @@
 .day {
-    border: 1px solid $main-fc;
+    position: relative;
     padding: $main-padding/2;
     width: 100%;
     height: 100%;
     font-size: 1rem;
-    box-shadow: 2px 2px 4px -2px $main-fc;
-    transition: box-shadow .2s;
+    box-shadow: -2px 2px 4px -2px $main-fc;
+    transition: box-shadow .3s;
     &:hover {
         cursor: pointer;
-        box-shadow: 2px 2px 8px -2px $main-fc;
+        box-shadow: -2px 2px 4px -3px $main-fc;
     }
     &__box {
         display: grid;
@@ -19,35 +19,43 @@
         padding: $main-padding;
         gap: 5px;
     }
-    &__tasked {
-        color: blue;
-        background-color: orangered;
+    &__isTask {
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0; 
+            right: 0;
+            border-top: 15px solid transparent;
+            border-left: 15px solid darken($theme-color, 22%);
+            width: 0;
+            box-shadow: -2px 1px 3px -2px $main-fc;
+        }
+        
     }
 }
 
 .today {
     color: $today-color;
-    border:1px solid $today-color;
-    box-shadow: 2px 2px 4px -2px $today-color;
-    &:hover {
-        box-shadow: 2px 2px 8px -2px $today-color;
+    box-shadow: -2px 2px 4px -2px $today-color;
+    &:hover,
+    &:active,
+    &:focus {
+        box-shadow: -2px 2px 4px -3px $today-color;
     }
 }
 
 .sunday {
-    color: $main-fc;
-    border:1px solid $hollyday-color;
-    box-shadow: 2px 2px 4px -2px $hollyday-color;
-    &:hover {
-        box-shadow: 2px 2px 8px -2px $hollyday-color;
+    color: $hollyday-color;
+    box-shadow: -2px 2px 4px -2px $hollyday-color;
+    &:hover,
+    &:active,
+    &:focus {
+        box-shadow: -2px 2px 4px -3px $hollyday-color;
     }
 }
 
 .todayIsSunday {
     color: $today-color;
-    &:hover {
-        box-shadow: 2px 2px 8px -2px $today-color;
-    }
 }
 
 .blank {
