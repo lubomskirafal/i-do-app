@@ -7,17 +7,17 @@ const DayTasks = props=> {
     if(tasks.length<1) return[];
 
     const classes = {
-        dayTasksBox: 'dayTasks',
         list: 'dayTasks__list',
-        taskDoneBtn:'',
-        taskDeleteBtn: ''
+        listItem: 'dayTasks__list-item',
+        taskDoneBtn:'button__task--done',
+        taskDeleteBtn: 'button__task--delete'
     };
 
     const {
-        dayTasksBox,
         list,
         taskDoneBtn,
         taskDeleteBtn,
+        listItem
     } = classes;
 
     const dayTasks = tasks.map(task=> {
@@ -26,6 +26,7 @@ const DayTasks = props=> {
 
         return (
             <li
+                className={listItem}
                 key={ID}
                 id={ID}
             >
@@ -41,11 +42,11 @@ const DayTasks = props=> {
     });
 
     return (
-        <div className={dayTasksBox}>
-            <ul className={list}>
-                {dayTasks}
-            </ul>
-        </div>
+        
+        <ul className={list}>
+            {dayTasks}
+        </ul>
+        
     )
 };
 

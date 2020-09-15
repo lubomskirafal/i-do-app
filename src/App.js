@@ -245,7 +245,8 @@ class App extends React.Component {
     });
     this.selectMonth();//re render to mark days with tasks
     this.handleNewTaskModal();// close "add new task" modal
-    
+    this.getDays();
+    this.showDayTaskList();
   };
 
   handleFormChange = (value, name)=> {
@@ -257,6 +258,19 @@ class App extends React.Component {
 
   showDayTaskList = (e, dayTasks)=> {
     //display task list for each day on click it
+    if(!e) {
+      //if call on add new ewent
+        const tasks = this.isTask(this.state.prevEventTarget);
+        return this.setState({
+          dayTasks: tasks
+        });
+    };
+  
+    //if call by day click
+    if(dayTasks.length<1 && this.state.isDayTasks) return this.setState({
+      isDayTasks: false
+    });
+
     if(dayTasks.length<1) return;
 
     const prevEventTarget = this.state.prevEventTarget;
@@ -363,7 +377,10 @@ class App extends React.Component {
             noTaskContent={error.content}
           />}
 
-          {isDayTasks && <DayTasks  tasks={dayTasks}/>}
+          <div className={'dayTasks'}>
+            {isDayTasks && <DayTasks  tasks={dayTasks}/>}
+          </div>
+          
       </div>
     );
   };
