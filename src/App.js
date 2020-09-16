@@ -315,7 +315,7 @@ class App extends React.Component {
       dayTasks,
       error
     } = this.state;
-
+    console.log(this.state.dayTasks)
     const days = this.state.days.map(day=> {
 
       const {date, tasks, classes, hollyday, today, id} = day;

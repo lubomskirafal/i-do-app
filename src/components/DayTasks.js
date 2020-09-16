@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from './Button';
 
+
 const DayTasks = props=> {
     const {tasks} = props;
 
@@ -9,14 +10,16 @@ const DayTasks = props=> {
     const classes = {
         list: 'dayTasks__list',
         listItem: 'dayTasks__list-item',
-        taskDoneBtn:'button__task--done',
-        taskDeleteBtn: 'button__task--delete'
+        taskDoneBtn:'button button__task button__task--done',
+        taskDeleteBtn: 'button button__task button__task--delete',
+        taskEditBtn: 'button button__task button__task--edit'
     };
 
     const {
         list,
         taskDoneBtn,
         taskDeleteBtn,
+        taskEditBtn,
         listItem
     } = classes;
 
@@ -30,13 +33,20 @@ const DayTasks = props=> {
                 key={ID}
                 id={ID}
             >
-            <Button
-                classes={taskDoneBtn}
-            />
             <p>{title}</p>
-            <Button
-                classes={taskDeleteBtn}
-            />
+            
+            <div>
+                <Button
+                    classes={taskDoneBtn}
+                    
+                /><Button
+                    classes={taskEditBtn}
+                />
+                <Button
+                    classes={taskDeleteBtn}
+                />
+            </div>
+            
             </li>
         );
     });
