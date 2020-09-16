@@ -21,7 +21,7 @@ class App extends React.Component {
       newTaskPriority: false,
       newTaskTitle: '',
       newTaskContent: '',
-      tasks:[],
+      tasks:this.importTasks(),
       isDayTasks: false,
       prevEventTarget: '',
       dayTasks: [],
@@ -33,6 +33,19 @@ class App extends React.Component {
 
     this.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+  };
+
+  exportTasks = ()=> {
+    const tasks = this.state.tasks;
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  };
+
+  importTasks = ()=> {
+    const tasks = localStorage.getItem('tasks')? JSON.parse(localStorage.getItem('tasks')):[];
+
+    
+    return tasks;
   };
 
   getTodayDate = (y, m, d)=> {
@@ -246,6 +259,7 @@ class App extends React.Component {
     this.selectMonth();//re render to mark days with tasks
     this.handleNewTaskModal();// close "add new task" modal
     this.getDays();
+    this.exportTasks();
     this.showDayTaskList();
   };
 
@@ -258,6 +272,7 @@ class App extends React.Component {
 
   showDayTaskList = (e, dayTasks)=> {
     //display task list for each day on click it
+
     if(!e) {
       //if call on add new ewent
         const tasks = this.isTask(this.state.prevEventTarget);
@@ -296,6 +311,8 @@ class App extends React.Component {
     //init calendar. month init days
     
     this.selectMonth();
+    this.importTasks();
+  
   };
 
   //render main component
@@ -316,7 +333,7 @@ class App extends React.Component {
       tasks,
       error
     } = this.state;
-    console.log(this.state.dayTasks)
+    
     const days = this.state.days.map(day=> {
 
       const {date, tasks, classes, hollyday, today, id} = day;
