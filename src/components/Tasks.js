@@ -2,7 +2,7 @@ import React from 'react';
 import Button from './Button';
 
 
-const DayTasks = props=> {
+const Tasks = props=> {
     const {tasks} = props;
 
     if(tasks.length<1) return[];
@@ -23,7 +23,7 @@ const DayTasks = props=> {
         listItem
     } = classes;
 
-    const dayTasks = tasks.map(task=> {
+    const tasksList = tasks.map(task=> {
         const {title, content, date, category, priority, id} = task;
         const ID = `${id.date}-${id.title}`;
 
@@ -54,10 +54,10 @@ const DayTasks = props=> {
     return (
         
         <ul className={list}>
-            {dayTasks}
+            {tasksList}
         </ul>
         
     )
 };
 
-export default DayTasks;
+export default Tasks;

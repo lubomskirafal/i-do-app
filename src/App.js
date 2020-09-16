@@ -4,7 +4,7 @@ import Nav from './components/Nav';
 import DaysLables from './components/DaysLabels';
 import Day from './components/Day';
 import NewTask from './components/NewTask';
-import DayTasks from './components/DayTasks';
+import Tasks from './components/Tasks';
 
 class App extends React.Component {
   constructor(props) {
@@ -313,6 +313,7 @@ class App extends React.Component {
       newTaskContent,
       isDayTasks,
       dayTasks,
+      tasks,
       error
     } = this.state;
     console.log(this.state.dayTasks)
@@ -378,7 +379,8 @@ class App extends React.Component {
           />}
 
           <div className={'dayTasks'}>
-            {isDayTasks && <DayTasks  tasks={dayTasks}/>}
+            {isDayTasks && <Tasks  tasks={dayTasks}/>}
+            { isDayTasks === false && <Tasks tasks={tasks}/>}
           </div>
           
       </div>
