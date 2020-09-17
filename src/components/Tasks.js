@@ -1,15 +1,13 @@
 import React from 'react';
 import Button from './Button';
 
-
 const Tasks = props=> {
-    const {tasks} = props;
-
+    const {tasks, handleClick} = props;
+    
     if(tasks.length<1) return[];
 
     const classes = {
         list: 'dayTasks__list',
-        listItem: 'dayTasks__list-item',
         taskDoneBtn:'button button__task button__task--done',
         taskDeleteBtn: 'button button__task button__task--delete',
         taskEditBtn: 'button button__task button__task--edit'
@@ -19,31 +17,30 @@ const Tasks = props=> {
         list,
         taskDoneBtn,
         taskDeleteBtn,
-        taskEditBtn,
-        listItem
+        taskEditBtn
     } = classes;
 
     const tasksList = tasks.map(task=> {
-        const {title, content, date, category, priority, id} = task;
+        const {title, content, date, category, priority, id, classList} = task;
         const ID = `${id.date}-${id.title}`;
-
+        
         return (
             <li
-                className={listItem}
+                className={classList}
                 key={ID}
                 id={ID}
+                onClick={()=> handleClick(task)}
             >
             <p>{title}</p>
             
             <div>
                 <Button
                     classes={taskDoneBtn}
-                    
-                /><Button
-                    classes={taskEditBtn}
+                    spanClassName={'fas fa-check'}
                 />
                 <Button
                     classes={taskDeleteBtn}
+                    spanClassName={'fas fa-times'}
                 />
             </div>
             

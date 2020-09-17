@@ -1,13 +1,16 @@
 import React from 'react';
 
 const Button = (props)=> {
-    const {classes, content, handleClick} = props;
+    const {classes, content, handleClick, spanClassName} = props;
     return (
         <button 
             className={classes}
             onClick={handleClick}
         >
-        {content}
+        <span
+        className={spanClassName}>
+            {content}
+        </span>
         </button>
     )
 };

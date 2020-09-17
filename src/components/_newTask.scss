@@ -8,6 +8,7 @@
     border-radius: 5px;
     padding: $main-padding;
     box-shadow: 2px 2px 20px -8px $main-fc;
+    z-index: 1;
     &__form {
         display: flex;
         align-items: center;

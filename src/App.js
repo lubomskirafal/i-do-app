@@ -5,6 +5,7 @@ import DaysLables from './components/DaysLabels';
 import Day from './components/Day';
 import NewTask from './components/NewTask';
 import Tasks from './components/Tasks';
+import FullTask from './components/FullTask';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,6 +26,8 @@ class App extends React.Component {
       isDayTasks: false,
       prevEventTarget: '',
       dayTasks: [],
+      isFullTask: false,
+      fullTask: null,
       error: {
         title: false,
         content: false
@@ -243,6 +246,7 @@ class App extends React.Component {
       category: newTaskCategory,
       priority: newTaskPriority,
       title: newTaskTitle,
+      classList: 'dayTasks__list-item',
       content: newTaskContent
     };
 
@@ -305,6 +309,13 @@ class App extends React.Component {
       }));
     };
   };
+
+  showFullTask = (task) => {
+    this.setState(prevState=>({
+      isFullTask: !prevState.isFullTask,
+      fullTask: task
+    }));
+  };
   
 
   componentDidMount() {
@@ -331,6 +342,8 @@ class App extends React.Component {
       isDayTasks,
       dayTasks,
       tasks,
+      isFullTask,
+      fullTask,
       error
     } = this.state;
     
@@ -375,10 +388,9 @@ class App extends React.Component {
           //main calendar component
           className={"day__box"}
           >
-            <DaysLables 
-              //calendar days name component
-            />
-            {days} 
+            {!isFullTask &&<DaysLables />} 
+            {!isFullTask && days} 
+            { isFullTask && <FullTask task={fullTask} />}
           </div>
 
           {newTask&&<NewTask 
@@ -396,8 +408,14 @@ class App extends React.Component {
           />}
 
           <div className={'dayTasks'}>
-            {isDayTasks && <Tasks  tasks={dayTasks}/>}
-            { isDayTasks === false && <Tasks tasks={tasks}/>}
+            {isDayTasks && <Tasks
+                tasks={dayTasks}
+                handleClick={this.showFullTask}
+              />}
+            { isDayTasks === false && <Tasks
+               tasks={tasks}
+                handleClick={this.showFullTask}
+               />}
           </div>
           
       </div>
