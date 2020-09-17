@@ -10,14 +10,15 @@ const Tasks = props=> {
         list: 'dayTasks__list',
         taskDoneBtn:'button button__task button__task--done',
         taskDeleteBtn: 'button button__task button__task--delete',
-        taskEditBtn: 'button button__task button__task--edit'
+        taskEditBtn: 'button button__task button__task--edit',
+        buttonsBox: 'button__task-box'
     };
 
     const {
         list,
         taskDoneBtn,
         taskDeleteBtn,
-        taskEditBtn
+        buttonsBox
     } = classes;
 
     const tasksList = tasks.map(task=> {
@@ -29,11 +30,11 @@ const Tasks = props=> {
                 className={classList}
                 key={ID}
                 id={ID}
-                onClick={()=> handleClick(task)}
+                onClick={(e)=> handleClick(e,task)}
             >
             <p>{title}</p>
             
-            <div>
+            <div className={buttonsBox}>
                 <Button
                     classes={taskDoneBtn}
                     spanClassName={'fas fa-check'}

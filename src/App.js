@@ -25,6 +25,7 @@ class App extends React.Component {
       tasks:this.importTasks(),
       isDayTasks: false,
       prevEventTarget: '',
+      prevFullTask:'',
       dayTasks: [],
       isFullTask: false,
       fullTask: null,
@@ -67,6 +68,18 @@ class App extends React.Component {
     return ({
       day, month, year, date
     });
+  };
+
+  getID = (y, m, d)=> {
+    
+    const  today = new Date(y, m, d);
+    
+    const day = today.getDate();
+    const month = today.getMonth()+1;
+    const year = today.getFullYear();
+    const date = `${year}-${month<10?"0"+(month):(month)}-${day<10?"0"+day:day}`;
+    
+    return  date;
   };
 
   getDate = (prev)=> { 
@@ -117,7 +130,7 @@ class App extends React.Component {
     
     for (let i=0; i<this.getDate().getDate(); i++) {
       date = i+1; 
-      const ID = this.getTodayDate(this.state.year,this.state.monthIndex, date).date;
+      const ID = this.getID(this.state.year,this.state.monthIndex, date);
       const isSunnday = new Date(this.state.year,this.state.monthIndex, date).getDay();
       isSunnday===0? hollyday=true:hollyday=false;
       
@@ -310,11 +323,22 @@ class App extends React.Component {
     };
   };
 
-  showFullTask = (task) => {
-    this.setState(prevState=>({
-      isFullTask: !prevState.isFullTask,
-      fullTask: task
-    }));
+  showFullTask = (e, task) => {
+
+    if(this.state.prevFullTask !== task) {
+      this.setState(prevState=>({
+        isFullTask: true,
+        fullTask: task,
+        prevFullTask: task
+      }));
+    }else {
+      this.setState(prevState=>({
+        isFullTask: !prevState.isFullTask,
+        fullTask: task,
+        prevFullTask: task
+      }));
+    }
+    
   };
   
 

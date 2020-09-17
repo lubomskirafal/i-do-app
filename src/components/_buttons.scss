@@ -93,6 +93,10 @@
             color: $second-fc;
             background-color: blue;
         }
+        &-box{
+            display: flex;
+            flex-wrap: nowrap;
+        }
         &--done {
             color: green;    
         }
