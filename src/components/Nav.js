@@ -13,6 +13,7 @@ const Nav = (props)=> {
         displayYear: 'select__display-span select__display-span--year',
         buttonPrev: 'button button--prev',
         buttonNext : 'button button--next',
+        buttonToday: 'button button--today'
     };
 
     const {
@@ -25,6 +26,7 @@ const Nav = (props)=> {
             displayYear,
             buttonPrev,
             buttonNext,
+            buttonToday
         } = classes;
 
     const {month, year, setMonthIndex, setYear, handleNewTaskModal} = props;
@@ -55,8 +57,13 @@ const Nav = (props)=> {
             </div>
             <div className={selectButton}>
                 <Button 
+                    classes={buttonToday}
+                    content={'Today'}
+                    handleClick={handleNewTaskModal}
+                />
+                <Button 
                     classes={buttonAddTask}
-                    content="Add task" 
+                    spanClassName={'fas fa-edit'}
                     handleClick={handleNewTaskModal}
                 />
             </div>

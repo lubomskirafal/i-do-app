@@ -4,8 +4,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: $main-padding;
-    font-size: 1.2rem;
+    padding: $main-padding 0;
     background-color: $second-bgc;
     .select {
         display: flex;
@@ -14,9 +13,8 @@
         flex-wrap: nowrap;
         &__display-span {
             font-family: monospace, sans-serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             padding: $main-padding/2;
-            border-radius: 10px;
             color: #fff;
         }
     }
