@@ -344,10 +344,12 @@ class App extends React.Component {
   goToday = ()=> {
     const index = new Date().getMonth();
     const month = this.months[index];
+    const year = new Date().getFullYear();
 
     this.setState({
       monthIndex: index,
-      month: month
+      month: month,
+      year: year
     },()=>{
       this.setState({
         days: this.getDays()
