@@ -340,6 +340,22 @@ class App extends React.Component {
     }
     
   };
+
+  goToday = ()=> {
+    const index = new Date().getMonth();
+    const month = this.months[index];
+
+    this.setState({
+      monthIndex: index,
+      month: month
+    },()=>{
+      this.setState({
+        days: this.getDays()
+      })
+    });
+
+    
+  };
   
 
   componentDidMount() {
@@ -406,6 +422,7 @@ class App extends React.Component {
           setMonthIndex={this.setMonthIndex}
           setYear={this.setYear}
           handleNewTaskModal={this.handleNewTaskModal}
+          goToday={this.goToday}
         />
         
         <div

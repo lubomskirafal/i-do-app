@@ -29,7 +29,7 @@ const Nav = (props)=> {
             buttonToday
         } = classes;
 
-    const {month, year, setMonthIndex, setYear, handleNewTaskModal} = props;
+    const {month, year, setMonthIndex, setYear, handleNewTaskModal, goToday} = props;
 
     return(
         <nav className={navigation}>
@@ -59,7 +59,7 @@ const Nav = (props)=> {
                 <Button 
                     classes={buttonToday}
                     content={'Today'}
-                    handleClick={handleNewTaskModal}
+                    handleClick={goToday}
                 />
                 <Button 
                     classes={buttonAddTask}
