@@ -181,9 +181,8 @@ class App extends React.Component {
     
     this.setState(prevState=>({
       monthIndex: prevState.monthIndex = index,
-      month: prevState.month = this.months[prevState.monthIndex],
-      days: this.getDays()
-    }));
+      month: prevState.month = this.months[prevState.monthIndex]
+    }),()=>{this.setState({days: this.getDays()})});
 
   };
 
@@ -349,7 +348,8 @@ class App extends React.Component {
     this.setState({
       monthIndex: index,
       month: month,
-      year: year
+      year: year,
+      isFullTask: false
     },()=>{
       this.setState({
         days: this.getDays()
