@@ -117,12 +117,18 @@
         &-box{
             display: flex;
             flex-wrap: nowrap;
+            &--full {
+                align-self: flex-end;
+            }
         }
         &--done {
             color: green;    
         }
         &--delete {
             color: red;
+        }
+        &--edit {
+            color: blue;
         }
     }
 }

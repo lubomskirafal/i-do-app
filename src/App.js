@@ -259,7 +259,8 @@ class App extends React.Component {
       priority: newTaskPriority,
       title: newTaskTitle,
       classList: 'dayTasks__list-item',
-      content: newTaskContent
+      content: newTaskContent,
+      done:false
     };
 
     tasks.push(task);
@@ -359,6 +360,25 @@ class App extends React.Component {
     
   };
   
+  setTaskAsDone = (e, id) => {
+    e.stopPropagation();
+
+    const tasks = this.state.tasks;
+
+    tasks.forEach(task=>{
+      if(task.id === id){
+        task.done = !task.done
+      };
+    });
+
+    this.setState({
+      tasks: tasks
+    })
+
+    this.getDays(); //re write days width re writed task
+    this.exportTasks(); //export re erited task to local storage
+    this.showDayTaskList();//render task list
+  };
 
   componentDidMount() {
     //init calendar. month init days
@@ -433,7 +453,12 @@ class App extends React.Component {
           >
             {!isFullTask &&<DaysLables />} 
             {!isFullTask && days} 
-            { isFullTask && <FullTask task={fullTask} />}
+            { 
+              isFullTask && <FullTask 
+                                task={fullTask} 
+                                setTaskAsDone={this.setTaskAsDone}
+                              />
+            }
           </div>
 
           {newTask&&<NewTask 
@@ -456,8 +481,9 @@ class App extends React.Component {
                 handleClick={this.showFullTask}
               />}
             { isDayTasks === false && <Tasks
-               tasks={tasks}
+                tasks={tasks}
                 handleClick={this.showFullTask}
+                setTaskAsDone={this.setTaskAsDone}
                />}
           </div>
           

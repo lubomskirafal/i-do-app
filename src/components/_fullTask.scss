@@ -5,6 +5,10 @@
         height: 100%;
         padding: $main-padding;
         color: $main-fc;
+        &>div{
+            display: flex;
+            flex-direction: column;
+        }
     }
     &__title {
         font-size: 2rem;

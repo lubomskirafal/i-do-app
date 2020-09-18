@@ -2,7 +2,7 @@ import React from 'react';
 import Button from './Button';
 
 const Tasks = props=> {
-    const {tasks, handleClick} = props;
+    const {tasks, handleClick, setTaskAsDone} = props;
     
     if(tasks.length<1) return[];
 
@@ -22,12 +22,16 @@ const Tasks = props=> {
     } = classes;
 
     const tasksList = tasks.map(task=> {
-        const {title, content, date, category, priority, id, classList} = task;
-        const ID = `${id.date}-${id.title}`;
+        const {title, content, date, category, priority, id, classList, done} = task;
         
+        const ID = `${id.date}-${id.title}`;
+        let classes = classList;
+        if(priority) classes = `${classList} priority`;
+        if(done) classes = `${classes} done`;
+
         return (
             <li
-                className={classList}
+                className={classes}
                 key={ID}
                 id={ID}
                 onClick={(e)=> handleClick(e,task)}
@@ -38,6 +42,7 @@ const Tasks = props=> {
                 <Button
                     classes={taskDoneBtn}
                     spanClassName={'fas fa-check'}
+                    handleClick={(e)=> setTaskAsDone(e, id)}
                 />
                 <Button
                     classes={taskDeleteBtn}
