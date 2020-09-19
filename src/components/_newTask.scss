@@ -26,14 +26,9 @@
         #date,
         #title,
         #content,
-        #category,
         label[for="priority"] {
             width: 100%;
             box-shadow: 1px 1px  8px -4px $main-fc;
-        }
-        #category {
-            background-color: $second-fc;
-            color: $main-fc;
         }
 
         label[for="priority"] {
@@ -50,7 +45,6 @@
         }
 
         #date,
-        #category,
         label[for="priority"] {
             &:hover {
                 cursor: pointer;

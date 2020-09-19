@@ -22,7 +22,6 @@ const NewTask = (props)=> {
         handleAddNewTask, 
         handleFormChange, 
         newTaskDate, 
-        newTaskCategory, 
         newTaskPriority, 
         newTaskTitle, 
         newTaskContent,
@@ -44,26 +43,6 @@ const NewTask = (props)=> {
                     value={newTaskDate}
                     onChange={(e)=> handleFormChange(e.target.value, 'newTaskDate')}
                 />
-
-                <select 
-                    name="category" 
-                    id="category"
-                    value={newTaskCategory}
-                    onChange={(e)=> handleFormChange(e.target.value,'newTaskCategory')}
-                >
-                    <option 
-                        disabled 
-                        value="category"
-                    >
-                    Category
-                    </option>
-
-                    <option value="work">Work</option>
-                    <option value="home">Home</option>
-                    <option value="finance">Finance</option>
-                    <option value="school">School</option>
-                    <option value="other">Other</option>
-                </select>
 
                 <label 
                     htmlFor="priority">Priority

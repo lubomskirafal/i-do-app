@@ -18,7 +18,6 @@ class App extends React.Component {
       monthIndex: new Date().getMonth(),
       newTask: false,
       newTaskDate: this.getTodayDate().date,
-      newTaskCategory: 'category',
       newTaskPriority: false,
       newTaskTitle: '',
       newTaskContent: '',
@@ -244,7 +243,7 @@ class App extends React.Component {
     //create new task object fom form inputs in state, and add to render array
 
     e.preventDefault();
-    const {newTaskDate, newTaskCategory, newTaskPriority, newTaskTitle, newTaskContent} = this.state;
+    const {newTaskDate, newTaskPriority, newTaskTitle, newTaskContent} = this.state;
 
     if(!this.isValid(newTaskTitle, newTaskContent)) return;
     
@@ -255,7 +254,6 @@ class App extends React.Component {
         title: newTaskTitle
       },
       date: newTaskDate,
-      category: newTaskCategory,
       priority: newTaskPriority,
       title: newTaskTitle,
       classList: 'dayTasks__list-item',
@@ -350,7 +348,8 @@ class App extends React.Component {
       monthIndex: index,
       month: month,
       year: year,
-      isFullTask: false
+      isFullTask: false,
+      isDayTasks:false
     },()=>{
       this.setState({
         days: this.getDays()
@@ -479,8 +478,9 @@ class App extends React.Component {
             {isDayTasks && <Tasks
                 tasks={dayTasks}
                 handleClick={this.showFullTask}
+                setTaskAsDone={this.setTaskAsDone}
               />}
-            { isDayTasks === false && <Tasks
+            { !isDayTasks && <Tasks
                 tasks={tasks}
                 handleClick={this.showFullTask}
                 setTaskAsDone={this.setTaskAsDone}
