@@ -374,16 +374,40 @@ class App extends React.Component {
       tasks: tasks
     })
 
-    this.getDays(); //re write days width re writed task
     this.exportTasks(); //export re erited task to local storage
     this.showDayTaskList();//render task list
+  };
+
+  removeTask = (e, id) => {
+    e.stopPropagation();
+    const tasks = this.state.tasks;
+    let index;
+    tasks.forEach(task=> {
+      if(task.id === id) {
+        index = tasks.indexOf(task);
+        tasks.splice(index,1);
+      };
+    });
+
+    this.setState({
+      tasks: tasks,
+      isFullTask: false,
+    },()=>{
+      this.exportTasks(); //export re erited task to local storage
+      
+      this.showDayTaskList();//render task list
+      this.setState({
+        days: this.getDays()
+      });
+    });
+
   };
 
   componentDidMount() {
     //init calendar. month init days
     
     this.selectMonth();
-    this.importTasks();
+    this.importTasks(); //import tasks from local storage
   
   };
 
@@ -456,6 +480,7 @@ class App extends React.Component {
               isFullTask && <FullTask 
                                 task={fullTask} 
                                 setTaskAsDone={this.setTaskAsDone}
+                                removeTask={this.removeTask}
                               />
             }
           </div>
@@ -479,11 +504,13 @@ class App extends React.Component {
                 tasks={dayTasks}
                 handleClick={this.showFullTask}
                 setTaskAsDone={this.setTaskAsDone}
+                removeTask={this.removeTask}
               />}
             { !isDayTasks && <Tasks
                 tasks={tasks}
                 handleClick={this.showFullTask}
                 setTaskAsDone={this.setTaskAsDone}
+                removeTask={this.removeTask}
                />}
           </div>
           

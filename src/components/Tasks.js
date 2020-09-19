@@ -2,7 +2,7 @@ import React from 'react';
 import Button from './Button';
 
 const Tasks = props=> {
-    const {tasks, handleClick, setTaskAsDone} = props;
+    const {tasks, handleClick, setTaskAsDone, removeTask} = props;
     
     if(tasks.length<1) return[];
 
@@ -47,6 +47,7 @@ const Tasks = props=> {
                 <Button
                     classes={taskDeleteBtn}
                     spanClassName={'fas fa-times'}
+                    handleClick={(e)=> removeTask(e, id)}
                 />
             </div>
             
