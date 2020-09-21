@@ -273,7 +273,7 @@ class App extends React.Component {
   handleAddNewTask = (e)=> {
     //create new task object fom form inputs in state, and add to render array
   
-    if(e) e.preventDefault();
+    e.preventDefault();
 
     const {newTaskDate, newTaskPriority, newTaskTitle, newTaskContent, newTaskClassList} = this.state;
     const tasks = this.state.tasks;
