@@ -21,6 +21,15 @@ const Tasks = props=> {
         buttonsBox
     } = classes;
 
+   tasks.sort((a,b)=> {
+       const dateA = a.id.date.replace(/[\-]/g,'');
+       const dateB = b.id.date.replace(/[\-]/g,'');
+
+       return (
+           dateA - dateB
+       );
+   });
+
     const tasksList = tasks.map(task=> {
         const {title, content, date, category, priority, id, classList, done} = task;
         

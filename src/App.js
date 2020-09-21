@@ -380,22 +380,28 @@ class App extends React.Component {
 
   removeTask = (e, id) => {
     e.stopPropagation();
+
     const tasks = this.state.tasks;
-    let index;
+
     tasks.forEach(task=> {
+
       if(task.id === id) {
-        index = tasks.indexOf(task);
+        let index = tasks.indexOf(task);
         tasks.splice(index,1);
       };
+
     });
 
     this.setState({
+
       tasks: tasks,
-      isFullTask: false,
+      isFullTask: false
+
     },()=>{
+
       this.exportTasks(); //export re erited task to local storage
-      
       this.showDayTaskList();//render task list
+
       this.setState({
         days: this.getDays()
       });
