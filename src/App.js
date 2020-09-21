@@ -19,6 +19,7 @@ class App extends React.Component {
       newTask: false,
       newTaskDate: this.getTodayDate().date,
       newTaskPriority: false,
+      newTaskClassList: 'dayTasks__list-item',
       newTaskTitle: '',
       newTaskContent: '',
       tasks:this.importTasks(),
@@ -28,6 +29,7 @@ class App extends React.Component {
       dayTasks: [],
       isFullTask: false,
       fullTask: null,
+      editedTask: null,
       error: {
         title: false,
         content: false
@@ -201,8 +203,37 @@ class App extends React.Component {
     
   };
 
-  handleNewTaskModal = (e)=> {
+  editTask = ()=> {
+    const tasks = this.state.tasks;
+    const {id, title, date, content, priority, classList, done} = this.state.editedTask;
+
+    tasks.forEach(task=> {
+
+      if(task.id === id) {
+        let index = tasks.indexOf(task);
+        tasks.splice(index,1);
+      };
+
+    });
+
+    this.setState({
+      newTaskTitle: title,
+      newTaskDate: date,
+      newTaskContent: content,
+      newTaskClassList: classList,
+      newTaskPriority: priority,
+      tasks: tasks
+    }, ()=> this.exportTasks());
+  }
+
+  handleNewTaskModal = (e, task = null)=> {
     //open "add new task" modal
+    if(task) {
+      this.setState({
+        editedTask: task
+      }, ()=> this.editTask());
+    };
+
     this.setState(prevState=>({
       newTask: !prevState.newTask
     }));
@@ -241,13 +272,14 @@ class App extends React.Component {
 
   handleAddNewTask = (e)=> {
     //create new task object fom form inputs in state, and add to render array
+  
+    if(e) e.preventDefault();
 
-    e.preventDefault();
-    const {newTaskDate, newTaskPriority, newTaskTitle, newTaskContent} = this.state;
-
-    if(!this.isValid(newTaskTitle, newTaskContent)) return;
-    
+    const {newTaskDate, newTaskPriority, newTaskTitle, newTaskContent, newTaskClassList} = this.state;
     const tasks = this.state.tasks;
+    
+    if(!this.isValid(newTaskTitle, newTaskContent)) return;
+
     const task = {
       id: {
         date: newTaskDate,
@@ -256,7 +288,7 @@ class App extends React.Component {
       date: newTaskDate,
       priority: newTaskPriority,
       title: newTaskTitle,
-      classList: 'dayTasks__list-item',
+      classList: newTaskClassList,
       content: newTaskContent,
       done:false
     };
@@ -265,11 +297,13 @@ class App extends React.Component {
 
     this.setState({
       // reset form inputs
+      fullTask: task,
       tasks: tasks,
-      newTaskCategory: 'category',
       newTaskPriority: false,
       newTaskTitle: '',
       newTaskContent: '',
+      newTaskClassList: 'dayTasks__list-item',
+      newTaskDate: this.getTodayDate().date
     });
     this.selectMonth();//re render to mark days with tasks
     this.handleNewTaskModal();// close "add new task" modal
@@ -321,7 +355,7 @@ class App extends React.Component {
     };
   };
 
-  showFullTask = (e, task) => {
+  showFullTask = (e,task) => {
 
     if(this.state.prevFullTask !== task) {
       this.setState(prevState=>({
@@ -483,11 +517,13 @@ class App extends React.Component {
             {!isFullTask &&<DaysLables />} 
             {!isFullTask && days} 
             { 
-              isFullTask && <FullTask 
-                                task={fullTask} 
-                                setTaskAsDone={this.setTaskAsDone}
-                                removeTask={this.removeTask}
-                              />
+              isFullTask && 
+              <FullTask 
+                task={fullTask} 
+                setTaskAsDone={this.setTaskAsDone}
+                removeTask={this.removeTask}
+                handleEditTask={this.handleNewTaskModal}
+              />
             }
           </div>
 

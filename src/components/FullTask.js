@@ -7,7 +7,7 @@ const FullTask = props => {
 
     const {title, date, content, priority, id, done} = props.task;
 
-    const {setTaskAsDone, removeTask} = props;
+    const {setTaskAsDone, removeTask, handleEditTask, task} = props;
     
     const classes = {
         spanBtnOk: 'fas fa-check',
@@ -51,6 +51,7 @@ const FullTask = props => {
                     <Button
                         classes={taskEditBtn}
                         spanClassName={spanBtnEdit}
+                        handleClick={(e)=> handleEditTask(e, task)}
                     />
                     <Button
                         classes={taskDeleteBtn}
