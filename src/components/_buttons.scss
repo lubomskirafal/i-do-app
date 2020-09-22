@@ -48,7 +48,7 @@
         border-radius: 5px;
         background-color: $theme-color;
         color: blue;
-        font-size: 1rem;
+        font-size: .9rem;
         &::before,
         &::after {
             content: none;
@@ -59,8 +59,11 @@
             box-shadow: 0 0 10px 5px #fff;
         }
         &--newTask {
-            margin-top: 10px;
-            align-self: flex-end;
+            width: 100%;
+            margin: 10px 0;
+            span {
+                height: 100%;
+            }
             &:hover,
             &:active,
             &:focus {
