@@ -37,35 +37,39 @@ const Nav = (props)=> {
 
         <nav className={navigation}>
 
-            <div className={selectMonth}>
-                
-                <Button 
-                    classes={buttonPrev}
-                    handleClick={setMonthIndex}
-                />
+            <div className="navigation__wrapper">
 
-                <span className={displayMonth}>{month}</span>
+                <div className={selectMonth}>
+                    
+                    <Button 
+                        classes={buttonPrev}
+                        handleClick={setMonthIndex}
+                    />
 
-                <Button 
-                    classes={buttonNext}
-                    handleClick={setMonthIndex}
-                />
+                    <span className={displayMonth}>{month}</span>
 
-            </div>
+                    <Button 
+                        classes={buttonNext}
+                        handleClick={setMonthIndex}
+                    />
 
-            <div className={selectYear}>
+                </div>
 
-                <Button
-                    classes={buttonPrev}
-                    handleClick={setYear}
-                />
+                <div className={selectYear}>
 
-                <span className={displayYear}>{year}</span>
+                    <Button
+                        classes={buttonPrev}
+                        handleClick={setYear}
+                    />
 
-                <Button 
-                    classes={buttonNext}
-                    handleClick={setYear}
-                />
+                    <span className={displayYear}>{year}</span>
+
+                    <Button 
+                        classes={buttonNext}
+                        handleClick={setYear}
+                    />
+
+                </div>
 
             </div>
 

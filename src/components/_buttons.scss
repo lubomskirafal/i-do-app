@@ -116,9 +116,12 @@
         }
         &-box{
             display: flex;
+            flex-direction: row;
             flex-wrap: nowrap;
             &--full {
-                align-self: flex-end;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
             }
         }
         &--done {

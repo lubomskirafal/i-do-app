@@ -438,11 +438,26 @@ class App extends React.Component {
 
   };
 
+  chceckIfResize = ()=> {
+
+    //reset display view to default
+    window.addEventListener('resize', ()=> {
+      this.setState({
+        newTask: false,
+        isFullTask: false
+      });
+
+    });
+
+  };
+
   componentDidMount() {
     //init calendar. month init days
     
     this.selectMonth();
     importTasks(); //import tasks from local storage
+
+    this.chceckIfResize(); //reset display view to default
   
   };
 
@@ -500,33 +515,55 @@ class App extends React.Component {
       //render main component
       <div className="calendar">
 
-        <Nav 
-          //navigation component
-          month={month}
-          year={year}
-          setMonthIndex={this.setMonthIndex}
-          setYear={this.setYear}
-          handleNewTaskModal={this.handleNewTaskModal}
-          goToday={this.goToday}
-        />
-        
-        <div
-          //main calendar component
-          className={"day__box"}
-          >
-            {!isFullTask &&<DaysLables />} 
-            {!isFullTask && days} 
-            { 
-              isFullTask && 
-              <FullTask 
-                task={fullTask} 
-                setTaskAsDone={this.setTaskAsDone}
-                removeTask={this.removeTask}
-                handleEditTask={this.handleNewTaskModal}
-              />
-            }
+          <Nav 
+            //navigation component
+            month={month}
+            year={year}
+            setMonthIndex={this.setMonthIndex}
+            setYear={this.setYear}
+            handleNewTaskModal={this.handleNewTaskModal}
+            goToday={this.goToday}
+          />
+          
+          <main className="calendar__wrapper">
 
-          </div>
+            {!isFullTask && <div
+              //main calendar component
+              className={"day__box"}
+                >
+                <DaysLables />
+                {days}
+              </div>
+             }
+            
+            { 
+                isFullTask && 
+                <FullTask 
+                  task={fullTask} 
+                  setTaskAsDone={this.setTaskAsDone}
+                  removeTask={this.removeTask}
+                  handleEditTask={this.handleNewTaskModal}
+                />
+              }
+
+            <div className={'dayTasks'}>
+
+              {isDayTasks && <Tasks
+                  tasks={dayTasks}
+                  handleClick={this.showFullTask}
+                  setTaskAsDone={this.setTaskAsDone}
+                  removeTask={this.removeTask}
+                />}
+                
+              { !isDayTasks && <Tasks
+                  tasks={tasks}
+                  handleClick={this.showFullTask}
+                  setTaskAsDone={this.setTaskAsDone}
+                  removeTask={this.removeTask}
+                />}
+
+            </div>
+          </main>
 
           {newTask&&<NewTask 
             handleNewTaskModal={this.handleNewTaskModal} 
@@ -541,24 +578,6 @@ class App extends React.Component {
             noTaskTitle={error.title}
             noTaskContent={error.content}
           />}
-
-          <div className={'dayTasks'}>
-
-            {isDayTasks && <Tasks
-                tasks={dayTasks}
-                handleClick={this.showFullTask}
-                setTaskAsDone={this.setTaskAsDone}
-                removeTask={this.removeTask}
-              />}
-              
-            { !isDayTasks && <Tasks
-                tasks={tasks}
-                handleClick={this.showFullTask}
-                setTaskAsDone={this.setTaskAsDone}
-                removeTask={this.removeTask}
-               />}
-
-          </div>
           
       </div>
 

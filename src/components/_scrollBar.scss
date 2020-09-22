@@ -1,0 +1,29 @@
+
+* {
+    & {
+        ::-webkit-scrollbar {
+            width: 3px;
+            
+            @include media(medium) {
+                width: 7px;
+            }
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+            
+          }
+        
+        ::-webkit-scrollbar-thumb {
+            transition: .3s;
+            background: lighten($main-fc, 30%);
+            border-radius: 10px;
+            
+          }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            transition: .3s;
+            background: lighten($main-fc,20);
+          }
+    }
+}

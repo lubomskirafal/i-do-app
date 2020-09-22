@@ -1,5 +1,7 @@
 @import './components/reset';
 @import './components/variables';
+@import './components/mixins';
+@import './components/scrollBar';
 @import './components/buttons';
 @import './components/navigation';
 @import './components/daysLabels';
@@ -9,15 +11,24 @@
 @import './components/dayTaskList';
 @import './components/fullTask';
 
-.calendar {
+.calendar,
+.calendar__wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-items: center;
-    flex-wrap:  nowrap;
     margin: auto;
     width: 100%;
+    max-width: 1440px;
     height: 100vh;
     font-size: $main-fz;
     font-family: arial, sans-serif;
+    overflow: hidden;
+    &__wrapper {
+        @include media(small) {
+            flex-direction: row;
+            flex-wrap: nowrap;
+            padding: 10px ;
+        }
+    }
 }

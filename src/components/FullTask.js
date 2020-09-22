@@ -21,7 +21,7 @@ const FullTask = props => {
         taskEditBtn: 'button button__task button__task--edit',
         taskDoneBtn:'button button__task button__task--done',
         titleStyle: 'fullTask__title',
-        mainBox: 'fullTask__box',
+        mainBox: 'fullTask',
         fullTaskDate: 'fullTask__date',
         contentBox: 'fullTask__content-box',
         contentCss: 'fullTask__content'
@@ -46,36 +46,32 @@ const FullTask = props => {
 
         <div className={!done? mainBox: `${mainBox} done`}>
 
+            <div className={buttonsBox}>
+
+                <Button
+                    classes={taskDoneBtn}
+                    spanClassName={spanBtnOk}
+                    handleClick={(e)=> setTaskAsDone(e,id)}
+                />
+
+                <Button
+                    classes={taskEditBtn}
+                    spanClassName={spanBtnEdit}
+                    handleClick={(e)=> handleEditTask(e, task)}
+                />
+                    
+                <Button
+                    classes={taskDeleteBtn}
+                    spanClassName={spanBtnDelete}
+                    handleClick={(e)=> removeTask(e, id)}
+                />
+
+            </div>
+
             <div>
 
-                <div className={buttonsBox}>
-
-                    <Button
-                        classes={taskDoneBtn}
-                        spanClassName={spanBtnOk}
-                        handleClick={(e)=> setTaskAsDone(e,id)}
-                     />
-
-                    <Button
-                        classes={taskEditBtn}
-                        spanClassName={spanBtnEdit}
-                        handleClick={(e)=> handleEditTask(e, task)}
-                    />
-                    
-                    <Button
-                        classes={taskDeleteBtn}
-                        spanClassName={spanBtnDelete}
-                        handleClick={(e)=> removeTask(e, id)}
-                    />
-
-                </div>
-
-                <div>
-
-                    <p className={priority?`${titleStyle} priority`: titleStyle}>{title}</p>
-                    <p className={fullTaskDate}>{date}</p>
-
-                </div>
+                <p className={priority?`${titleStyle} priority`: titleStyle}>{title}</p>
+                <p className={fullTaskDate}>{date}</p>
 
             </div>
 
