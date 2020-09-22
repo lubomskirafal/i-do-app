@@ -3,7 +3,10 @@ import Button from './Button';
 import Error from './Error';
 
 const NewTask = (props)=> {
+
+    //add new task form modal
     const classes = {
+        //css classes
         buttonClose:'button button--close',
         buttonAdd: 'button button--add-task button--add-task--newTask',
         newTask: 'newTask',
@@ -32,11 +35,14 @@ const NewTask = (props)=> {
     return(
 
         <div className={newTask}>
+
         <Button
             classes={buttonClose}
             handleClick={handleNewTaskModal}
         />
+
             <form className={form}>
+
                 <input 
                     type="date" 
                     id="date" 
@@ -83,9 +89,13 @@ const NewTask = (props)=> {
                     content={'Add task'}
                     handleClick={handleAddNewTask}
                 />
+
             </form>
+
         </div>
-    )
+
+    );
+    
 };
 
 export default NewTask;

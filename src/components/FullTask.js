@@ -3,12 +3,15 @@ import Button from './Button';
 
 const FullTask = props => {
     
+    //render full task content
     if(!props.task) return;
 
+    //attr of each task
     const {title, date, content, priority, id, done} = props.task;
 
     const {setTaskAsDone, removeTask, handleEditTask, task} = props;
     
+    //css classes
     const classes = {
         spanBtnOk: 'fas fa-check',
         spanBtnDelete: 'fas fa-times',
@@ -40,35 +43,50 @@ const FullTask = props => {
     } = classes;
 
     return (
+
         <div className={!done? mainBox: `${mainBox} done`}>
+
             <div>
+
                 <div className={buttonsBox}>
+
                     <Button
                         classes={taskDoneBtn}
                         spanClassName={spanBtnOk}
                         handleClick={(e)=> setTaskAsDone(e,id)}
                      />
+
                     <Button
                         classes={taskEditBtn}
                         spanClassName={spanBtnEdit}
                         handleClick={(e)=> handleEditTask(e, task)}
                     />
+                    
                     <Button
                         classes={taskDeleteBtn}
                         spanClassName={spanBtnDelete}
                         handleClick={(e)=> removeTask(e, id)}
                     />
+
                 </div>
 
                 <div>
+
                     <p className={priority?`${titleStyle} priority`: titleStyle}>{title}</p>
                     <p className={fullTaskDate}>{date}</p>
+
                 </div>
+
             </div>
+
             <div className={contentBox}>
+
                 <p className={contentCss}>{content}</p>
+
             </div>
+
         </div>
+
     );
 };
 
