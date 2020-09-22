@@ -235,17 +235,9 @@ class App extends React.Component {
   };
 
   editTask = ()=> {
+    //fil add new task width edited task content
     const tasks = this.state.tasks;
-    const {id, title, date, content, priority, classList} = this.state.editedTask;
-
-    tasks.forEach(task=> {
-
-      if(task.id === id) {
-        let index = tasks.indexOf(task);
-        tasks.splice(index,1);
-      };
-
-    });
+    const {title, date, content, priority, classList} = this.state.editedTask;
 
     this.setState({
       newTaskTitle: title,
@@ -254,7 +246,7 @@ class App extends React.Component {
       newTaskClassList: classList,
       newTaskPriority: priority,
       tasks: tasks
-    }, ()=> exportTasks(this.state.tasks));
+    });
 
   }
 
@@ -277,9 +269,22 @@ class App extends React.Component {
   
     e.preventDefault();
 
-    const {newTaskDate, newTaskPriority, newTaskTitle, newTaskContent, newTaskClassList} = this.state;
+    const {newTaskDate, newTaskPriority, newTaskTitle, newTaskContent, newTaskClassList, editedTask} = this.state;
     const tasks = this.state.tasks;
+
+    if(editedTask) {
+      //if editing task find old task in array and replace with new one
+      tasks.forEach(task=> {
+
+        if(task.id === editedTask.id) {
+          let index = tasks.indexOf(task);
+          tasks.splice(index,1);
+        };
+  
+      });
+    };
     
+    //add new task
     if(!isValid(newTaskTitle, newTaskContent, this)) return;
 
     const task = {
